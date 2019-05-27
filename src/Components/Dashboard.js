@@ -9,7 +9,7 @@ import { renderLayers } from "../util/deckgl-layers";
 import {
   MapStylePicker,
   LayerControls,
-  SCATTERPLOT_CONTROLS
+  HEXAGON_CONTROLS
 } from "../util/controls";
 
 const INITIAL_VIEW_STATE = {
@@ -27,17 +27,36 @@ export default class Dashboard extends Component {
     points: [],
     rideList: [],
     style: "mapbox://styles/mapbox/light-v9",
-    settings: Object.keys(SCATTERPLOT_CONTROLS).reduce(
+    settings: Object.keys(HEXAGON_CONTROLS).reduce(
       (accu, key) => ({
         ...accu,
-        [key]: SCATTERPLOT_CONTROLS[key].value
+        [key]: HEXAGON_CONTROLS[key].value
       }),
       {}
-    )
+    ),
+    hover: {
+      x: 0,
+      y: 0,
+      hoveredObject: null
+    }
   };
 
   handleStyleChange = style => {
     this.setState({ style });
+  };
+
+  handleHover = ({ x, y, object }) => {
+    // console.log(object);
+
+    const label = object
+      ? object.points
+        ? `${object.points.length} pickups or dropoffs here`
+        : object.pickup
+        ? "Pickup"
+        : "Dropoff"
+      : null;
+
+    this.setState({ hover: { x, y, hoveredObject: object, label } });
   };
 
   handleDrop = rideList => {
@@ -51,13 +70,12 @@ export default class Dashboard extends Component {
         position: [Number(curr.from_long), Number(curr.from_lat)],
         pickup: true
       });
-      accu.push({
-        position: [
-          curr.to_long ? Number(curr.to_long) : null,
-          curr.to_lat ? Number(curr.to_lat) : null
-        ],
-        pickup: false
-      });
+      if (curr.to_long) {
+        accu.push({
+          position: [Number(curr.to_long), Number(curr.to_lat)],
+          pickup: false
+        });
+      }
       return accu;
     }, []);
     this.setState({ points });
@@ -69,18 +87,26 @@ export default class Dashboard extends Component {
 
   render() {
     console.log(this.state);
+    const { hover } = this.state;
     return (
       <div className="dashboard">
         <DropzoneComponent handleDrop={this.handleDrop} />
-
         <div className="map-container">
+          {hover.hoveredObject && (
+            <div
+              className="tooltip"
+              style={{ transform: `translate(${hover.x}px, ${hover.y}px)` }}
+            >
+              <div>{hover.label}</div>
+            </div>
+          )}
           <MapStylePicker
             currentStyle={this.state.style}
             onStyleChange={this.handleStyleChange}
           />
           <LayerControls
             settings={this.state.settings}
-            plotTypes={SCATTERPLOT_CONTROLS}
+            plotTypes={HEXAGON_CONTROLS}
             onChange={settings => this._updateLayerSettings(settings)}
           />
           <DeckGL
@@ -88,7 +114,8 @@ export default class Dashboard extends Component {
             height={window.innerHeight}
             layers={renderLayers({
               data: this.state.points,
-              settings: this.state.settings
+              settings: this.state.settings,
+              onHover: hover => this.handleHover(hover)
             })}
             initialViewState={INITIAL_VIEW_STATE}
             controller
