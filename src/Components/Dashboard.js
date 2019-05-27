@@ -6,6 +6,7 @@ import DeckGL from "deck.gl";
 // import { MapStylePicker } from "./controls";
 import DropzoneComponent from "./DropzoneComponent";
 import { renderLayers } from "../util/deckgl-layers";
+import { MapStylePicker } from "../util/controls";
 
 const INITIAL_VIEW_STATE = {
   longitude: 77.63817,
@@ -26,9 +27,9 @@ export default class Dashboard extends Component {
     style: "mapbox://styles/mapbox/light-v9"
   };
 
-  // componentDidUpdate() {
-  //   this._processData();
-  // }
+  handleStyleChange = style => {
+    this.setState({ style });
+  };
 
   handleDrop = rideList => {
     this.setState({ rideList });
@@ -59,6 +60,10 @@ export default class Dashboard extends Component {
       <div>
         <DropzoneComponent handleDrop={this.handleDrop} />
         <div>
+          <MapStylePicker
+            currentStyle={this.state.style}
+            onStyleChange={this.handleStyleChange}
+          />
           <DeckGL
             width="500px"
             height="500px"
