@@ -6,7 +6,11 @@ import DeckGL from "deck.gl";
 // import { MapStylePicker } from "./controls";
 import DropzoneComponent from "./DropzoneComponent";
 import { renderLayers } from "../util/deckgl-layers";
-import { MapStylePicker } from "../util/controls";
+import {
+  MapStylePicker,
+  LayerControls,
+  SCATTERPLOT_CONTROLS
+} from "../util/controls";
 
 const INITIAL_VIEW_STATE = {
   longitude: 77.63817,
@@ -22,7 +26,14 @@ export default class Dashboard extends Component {
   state = {
     points: [],
     rideList: [],
-    style: "mapbox://styles/mapbox/light-v9"
+    style: "mapbox://styles/mapbox/light-v9",
+    settings: Object.keys(SCATTERPLOT_CONTROLS).reduce(
+      (accu, key) => ({
+        ...accu,
+        [key]: SCATTERPLOT_CONTROLS[key].value
+      }),
+      {}
+    )
   };
 
   handleStyleChange = style => {
@@ -52,6 +63,10 @@ export default class Dashboard extends Component {
     this.setState({ points });
   };
 
+  _updateLayerSettings = settings => {
+    this.setState({ settings });
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -63,10 +78,18 @@ export default class Dashboard extends Component {
             currentStyle={this.state.style}
             onStyleChange={this.handleStyleChange}
           />
+          <LayerControls
+            settings={this.state.settings}
+            plotTypes={SCATTERPLOT_CONTROLS}
+            onChange={settings => this._updateLayerSettings(settings)}
+          />
           <DeckGL
             width={window.innerWidth / 1.5}
             height={window.innerHeight}
-            layers={renderLayers({ data: this.state.points })}
+            layers={renderLayers({
+              data: this.state.points,
+              settings: this.state.settings
+            })}
             initialViewState={INITIAL_VIEW_STATE}
             controller
           >
