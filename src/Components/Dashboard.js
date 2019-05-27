@@ -5,10 +5,11 @@ import DeckGL from "deck.gl";
 
 // import { MapStylePicker } from "./controls";
 import DropzoneComponent from "./DropzoneComponent";
+import { renderLayers } from "../util/deckgl-layers";
 
 const INITIAL_VIEW_STATE = {
-  longitude: -74,
-  latitude: 40.7,
+  longitude: 77.63817,
+  latitude: 13.00198,
   zoom: 11,
   minZoom: 5,
   maxZoom: 16,
@@ -20,12 +21,36 @@ const INITIAL_VIEW_STATE = {
 
 export default class Dashboard extends Component {
   state = {
+    points: [],
     rideList: [],
     style: "mapbox://styles/mapbox/light-v9"
   };
 
+  // componentDidUpdate() {
+  //   this._processData();
+  // }
+
   handleDrop = rideList => {
     this.setState({ rideList });
+    this._processData();
+  };
+
+  _processData = () => {
+    const points = this.state.rideList.reduce((accu, curr) => {
+      accu.push({
+        position: [Number(curr.from_long), Number(curr.from_lat)],
+        pickup: true
+      });
+      accu.push({
+        position: [
+          curr.to_long ? Number(curr.to_long) : null,
+          curr.to_lat ? Number(curr.to_lat) : null
+        ],
+        pickup: false
+      });
+      return accu;
+    }, []);
+    this.setState({ points });
   };
 
   render() {
@@ -37,6 +62,7 @@ export default class Dashboard extends Component {
           <DeckGL
             width="500px"
             height="500px"
+            layers={renderLayers({ data: this.state.points })}
             initialViewState={INITIAL_VIEW_STATE}
             controller
           >
