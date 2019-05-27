@@ -15,9 +15,7 @@ const INITIAL_VIEW_STATE = {
   minZoom: 5,
   maxZoom: 16,
   pitch: 0,
-  bearing: 0,
-  width: "400px",
-  height: "400px"
+  bearing: 0
 };
 
 export default class Dashboard extends Component {
@@ -57,16 +55,17 @@ export default class Dashboard extends Component {
   render() {
     console.log(this.state);
     return (
-      <div>
+      <div className="dashboard">
         <DropzoneComponent handleDrop={this.handleDrop} />
-        <div>
+
+        <div className="map-container">
           <MapStylePicker
             currentStyle={this.state.style}
             onStyleChange={this.handleStyleChange}
           />
           <DeckGL
-            width="500px"
-            height="500px"
+            width={window.innerWidth / 1.5}
+            height={window.innerHeight}
             layers={renderLayers({ data: this.state.points })}
             initialViewState={INITIAL_VIEW_STATE}
             controller

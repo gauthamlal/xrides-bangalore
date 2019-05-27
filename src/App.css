@@ -1,2 +1,14 @@
 @import url("./styles/dropzone.css");
 @import url("./styles/mapStyles.css");
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
