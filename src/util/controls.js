@@ -86,8 +86,6 @@ export const LayerControls = props => {
 
   const { title, settings, plotTypes = {} } = props;
 
-  console.log(props);
-
   return (
     <div className="layer-controls">
       {title && <h4>{title}</h4>}

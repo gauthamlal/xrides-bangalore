@@ -23,7 +23,6 @@ const elevationRange = [0, 1000];
 
 export function renderLayers(props) {
   const { data, onHover, settings } = props;
-  console.log(props);
 
   return [
     settings.showScatterplot &&

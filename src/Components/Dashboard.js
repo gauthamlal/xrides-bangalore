@@ -11,6 +11,8 @@ import {
   LayerControls,
   HEXAGON_CONTROLS
 } from "../util/controls";
+import Charts from "../util/charts";
+import { isNumber } from "util";
 
 const INITIAL_VIEW_STATE = {
   longitude: 77.63817,
@@ -65,20 +67,56 @@ export default class Dashboard extends Component {
   };
 
   _processData = () => {
-    const points = this.state.rideList.reduce((accu, curr) => {
-      accu.push({
-        position: [Number(curr.from_long), Number(curr.from_lat)],
-        pickup: true
-      });
-      if (curr.to_long) {
-        accu.push({
-          position: [Number(curr.to_long), Number(curr.to_lat)],
-          pickup: false
-        });
+    const data = this.state.rideList.reduce(
+      (accu, curr) => {
+        // console.log(curr.from_date);
+        // console.log(new Date(curr.from_date));
+        const pickupHour = curr.from_date
+          ? new Date(curr.from_date).getHours()
+          : null;
+        const dropoffHour = curr.to_date
+          ? new Date(curr.to_date).getHours()
+          : null;
+
+        if (curr.from_long) {
+          accu.points.push({
+            position: [Number(curr.from_long), Number(curr.from_lat)],
+            hour: pickupHour,
+            pickup: true
+          });
+        }
+        if (curr.to_long) {
+          accu.points.push({
+            position: [Number(curr.to_long), Number(curr.to_lat)],
+            hour: dropoffHour,
+            pickup: false
+          });
+        }
+        if (isNumber(pickupHour)) {
+          const prevPickups = accu.pickupObj[pickupHour] || 0;
+          accu.pickupObj[pickupHour] = prevPickups + 1;
+        }
+        if (isNumber(dropoffHour)) {
+          const prevDropoffs = accu.dropoffObj[dropoffHour] || 0;
+          accu.dropoffObj[dropoffHour] = prevDropoffs + 1;
+        }
+        return accu;
+      },
+      {
+        points: [],
+        pickupObj: {},
+        dropoffObj: {}
       }
-      return accu;
-    }, []);
-    this.setState({ points });
+    );
+
+    data.pickups = Object.entries(data.pickupObj).map(([hour, count]) => {
+      return { hour: Number(hour), x: Number(hour) + 0.5, y: count };
+    });
+
+    data.dropoffs = Object.entries(data.dropoffObj).map(([hour, count]) => {
+      return { hour: Number(hour), x: Number(hour) + 0.5, y: count };
+    });
+    this.setState(data);
   };
 
   _updateLayerSettings = settings => {
@@ -122,6 +160,7 @@ export default class Dashboard extends Component {
           >
             <StaticMap mapStyle={this.state.style} />
           </DeckGL>
+          <Charts {...this.state} />
         </div>
       </div>
     );
