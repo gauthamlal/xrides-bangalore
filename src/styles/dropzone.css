@@ -7,6 +7,7 @@
   position: relative;
   cursor: pointer;
   outline: none;
+  grid-row: 1 / 2;
 }
 
 .dropzone > p {

@@ -1,5 +1,6 @@
 @import url("./styles/dropzone.css");
 @import url("./styles/mapStyles.css");
+@import url("./styles/charts.css");
 
 html,
 body,
@@ -31,5 +32,6 @@ body,
 
 .dashboard {
   grid-row: 2 / -1;
-  grid-template-rows: ;
+  display: grid;
+  grid-template-rows: 70px 600px auto;
 }

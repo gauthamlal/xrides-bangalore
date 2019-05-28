@@ -1,28 +1,27 @@
 import React, { Component } from "react";
-// import { StaticMap } from "react-map-gl";
-// import DeckGL from "deck.gl";
+import { StaticMap } from "react-map-gl";
+import DeckGL from "deck.gl";
 // import BigNumber from "bignumber.js";
 
-// import { MapStylePicker } from "./controls";
 import DropzoneComponent from "./DropzoneComponent";
-// import { renderLayers } from "../util/deckgl-layers";
+import { renderLayers } from "../util/deckgl-layers";
 import {
-  // MapStylePicker,
-  // LayerControls,
+  MapStylePicker,
+  LayerControls,
   HEXAGON_CONTROLS
 } from "../util/controls";
-// import Charts from "../util/charts";
+import Charts from "../util/charts";
 import { isNumber } from "util";
 
-// const INITIAL_VIEW_STATE = {
-//   longitude: 77.63817,
-//   latitude: 13.00198,
-//   zoom: 11,
-//   minZoom: 5,
-//   maxZoom: 16,
-//   pitch: 0,
-//   bearing: 0
-// };
+const INITIAL_VIEW_STATE = {
+  longitude: 77.63817,
+  latitude: 13.00198,
+  zoom: 11,
+  minZoom: 5,
+  maxZoom: 16,
+  pitch: 0,
+  bearing: 0
+};
 
 const initialState = {
   points: [],
@@ -160,7 +159,7 @@ export default class Dashboard extends Component {
 
   render() {
     console.log(this.state);
-    // const { hover } = this.state;
+    const { hover } = this.state;
     return (
       <div className="dashboard">
         <DropzoneComponent
@@ -168,7 +167,7 @@ export default class Dashboard extends Component {
           isFileUploaded={!(this.state.rideList.length === 0)}
           handleDrop={this.handleDrop}
         />
-        {/* <div className="map-container">
+        <div className="map-container">
           {hover.hoveredObject && (
             <div
               className="tooltip"
@@ -202,12 +201,14 @@ export default class Dashboard extends Component {
           >
             <StaticMap mapStyle={this.state.style} />
           </DeckGL>
+        </div>
+        <div className="chart-container">
           <Charts
             {...this.state}
             highlight={hour => this.handleHighlight(hour)}
             select={hour => this.handleChartSelect(hour)}
           />
-        </div> */}
+        </div>
       </div>
     );
   }
