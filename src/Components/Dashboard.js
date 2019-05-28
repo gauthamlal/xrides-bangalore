@@ -1,27 +1,46 @@
 import React, { Component } from "react";
-import { StaticMap } from "react-map-gl";
-import DeckGL from "deck.gl";
+// import { StaticMap } from "react-map-gl";
+// import DeckGL from "deck.gl";
 // import BigNumber from "bignumber.js";
 
 // import { MapStylePicker } from "./controls";
 import DropzoneComponent from "./DropzoneComponent";
-import { renderLayers } from "../util/deckgl-layers";
+// import { renderLayers } from "../util/deckgl-layers";
 import {
-  MapStylePicker,
-  LayerControls,
+  // MapStylePicker,
+  // LayerControls,
   HEXAGON_CONTROLS
 } from "../util/controls";
-import Charts from "../util/charts";
+// import Charts from "../util/charts";
 import { isNumber } from "util";
 
-const INITIAL_VIEW_STATE = {
-  longitude: 77.63817,
-  latitude: 13.00198,
-  zoom: 11,
-  minZoom: 5,
-  maxZoom: 16,
-  pitch: 0,
-  bearing: 0
+// const INITIAL_VIEW_STATE = {
+//   longitude: 77.63817,
+//   latitude: 13.00198,
+//   zoom: 11,
+//   minZoom: 5,
+//   maxZoom: 16,
+//   pitch: 0,
+//   bearing: 0
+// };
+
+const initialState = {
+  points: [],
+  rideList: [],
+  style: "mapbox://styles/mapbox/light-v9",
+  settings: Object.keys(HEXAGON_CONTROLS).reduce(
+    (accu, key) => ({
+      ...accu,
+      [key]: HEXAGON_CONTROLS[key].value
+    }),
+    {}
+  ),
+  hover: {
+    x: 0,
+    y: 0,
+    hoveredObject: null
+  },
+  selectedHour: null
 };
 
 export default class Dashboard extends Component {
@@ -42,6 +61,10 @@ export default class Dashboard extends Component {
       hoveredObject: null
     },
     selectedHour: null
+  };
+
+  handleFileRemoval = () => {
+    this.setState(initialState);
   };
 
   handleStyleChange = style => {
@@ -137,11 +160,15 @@ export default class Dashboard extends Component {
 
   render() {
     console.log(this.state);
-    const { hover } = this.state;
+    // const { hover } = this.state;
     return (
       <div className="dashboard">
-        <DropzoneComponent handleDrop={this.handleDrop} />
-        <div className="map-container">
+        <DropzoneComponent
+          removeFile={this.handleFileRemoval}
+          isFileUploaded={!(this.state.rideList.length === 0)}
+          handleDrop={this.handleDrop}
+        />
+        {/* <div className="map-container">
           {hover.hoveredObject && (
             <div
               className="tooltip"
@@ -180,7 +207,7 @@ export default class Dashboard extends Component {
             highlight={hour => this.handleHighlight(hour)}
             select={hour => this.handleChartSelect(hour)}
           />
-        </div>
+        </div> */}
       </div>
     );
   }

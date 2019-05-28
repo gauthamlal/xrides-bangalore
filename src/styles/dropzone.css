@@ -1,4 +1,31 @@
 .dropzone {
   flex: 0 1 auto;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 2px;
+  margin: 10px;
+  background-color: #f3efef;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.dropzone > p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.file-uploaded {
+  display: flex;
+  justify-content: space-between;
+  cursor: initial;
+}
+
+.remove-file {
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+}
+
+.remove-file:hover {
+  color: gray;
 }

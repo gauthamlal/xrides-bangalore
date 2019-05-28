@@ -2,13 +2,34 @@
 @import url("./styles/mapStyles.css");
 
 html,
-body {
+body,
+#root,
+.App {
   height: 100%;
   margin: 0;
 }
 
-.dashboard {
+/* .dashboard {
   display: flex;
   flex-direction: column;
   height: 100%;
+} */
+
+.App {
+  display: grid;
+  grid-template-rows: 70px 1fr;
+  /* position: relative; */
+}
+
+.navbar {
+  grid-row: 1 / 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+}
+
+.dashboard {
+  grid-row: 2 / -1;
+  grid-template-rows: ;
 }

@@ -3,6 +3,8 @@ import Dropzone from "react-dropzone";
 import csv from "csv";
 
 export default function DropzoneComponent(props) {
+  console.log(props);
+
   const handleFileUpload = files => {
     const file = files[0];
     let rideList = [];
@@ -76,19 +78,33 @@ export default function DropzoneComponent(props) {
     reader.readAsBinaryString(file);
   };
 
-  return (
+  const FileUploaded = (
+    <div className="dropzone file-uploaded">
+      <p>File has been uploaded successfully!</p>
+      <p className="remove-file" onClick={props.removeFile}>
+        X
+      </p>
+    </div>
+  );
+
+  const Drop = (
     <Dropzone
       accept=".csv"
       onDrop={acceptedFiles => handleFileUpload(acceptedFiles)}
     >
       {({ getRootProps, getInputProps }) => (
-        <section className="dropzone">
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <p>Drag 'n' drop some files here, or click to select files</p>
-          </div>
-        </section>
+        // <section className="dropzone">
+        <div className="dropzone" {...getRootProps()}>
+          <input {...getInputProps()} />
+          <p>
+            Click to select your{" "}
+            <span style={{ fontWeight: "bold" }}>.CSV</span> file
+          </p>
+        </div>
+        // </section>
       )}
     </Dropzone>
   );
+
+  return props.isFileUploaded ? FileUploaded : Drop;
 }
