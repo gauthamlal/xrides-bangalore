@@ -61,9 +61,20 @@ export default class Dashboard extends Component {
     this.setState({ hover: { x, y, hoveredObject: object, label } });
   };
 
+  handleHighlight = highlightedHour => {
+    this.setState({ highlightedHour });
+  };
+
   handleDrop = rideList => {
     this.setState({ rideList });
     this._processData();
+  };
+
+  handleChartSelect = selectedHour => {
+    this.setState({
+      selectedHour:
+        selectedHour === this.state.selectedHour ? null : selectedHour
+    });
   };
 
   _processData = () => {
@@ -160,7 +171,11 @@ export default class Dashboard extends Component {
           >
             <StaticMap mapStyle={this.state.style} />
           </DeckGL>
-          <Charts {...this.state} />
+          <Charts
+            {...this.state}
+            highlight={hour => this.handleHighlight(hour)}
+            select={hour => this.handleChartSelect(hour)}
+          />
         </div>
       </div>
     );
