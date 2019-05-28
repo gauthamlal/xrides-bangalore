@@ -10,6 +10,7 @@ import {
 } from "react-vis";
 
 export default function Charts({
+  rideList,
   pickups,
   dropoffs,
   highlight,
@@ -30,15 +31,17 @@ export default function Charts({
         ? "#17B8BE"
         : "#125C77"
   }));
+  const totalEntries = rideList.length;
   return (
     <div className="chart">
       <h2>Pickups by hour</h2>
       <p>As percentage of all trips</p>
       <XYPlot
         height={140}
-        width={490}
-        margin={{ left: 40, right: 25, top: 10, bottom: 25 }}
-        onMouseLeave={() => highlight(null)}
+        width={480}
+        // margin={{ left: 40, right: 25, top: 10, bottom: 35 }}
+        // yDomain={[0, 5]}
+        // onMouseLeave={() => highlight(null)}
       >
         <XAxis
           tickFormat={h =>
@@ -46,12 +49,30 @@ export default function Charts({
           }
           tickSizeInner={0}
           tickValues={[0, 6, 12, 18, 24]}
+          style={{
+            line: { stroke: "#ADDDE1" },
+            ticks: { stroke: "#ADDDE1" },
+            text: { stroke: "none", fill: "#6b6b76", fontWeight: 600 }
+          }}
         />
-        <YAxis tickFormat={d => ((d / 4000) * 100).toFixed(0) + "%"} />
+        <YAxis
+          tickFormat={d => {
+            // console.log(d);
+            // console.log(((d / totalEntries) * 100).toFixed(0) + "%");
+
+            return ((d / totalEntries) * 100).toFixed(0) + "%";
+          }}
+          style={{
+            line: { stroke: "#ADDDE1" },
+            ticks: { stroke: "#ADDDE1" },
+            text: { stroke: "none", fill: "#6b6b76", fontWeight: 600 }
+          }}
+        />
         <VerticalBarSeries
           colorType="literal"
           data={data}
           onValueMouseOver={d => highlight(d.hour)}
+          onValueMouseOut={() => highlight(null)}
           onValueClick={d => select(d.hour)}
           style={{ cursor: "pointer" }}
         />

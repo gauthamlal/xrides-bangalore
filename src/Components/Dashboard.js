@@ -40,7 +40,8 @@ export default class Dashboard extends Component {
       x: 0,
       y: 0,
       hoveredObject: null
-    }
+    },
+    selectedHour: null
   };
 
   handleStyleChange = style => {
@@ -163,6 +164,9 @@ export default class Dashboard extends Component {
             height={window.innerHeight}
             layers={renderLayers({
               data: this.state.points,
+              hour: isNumber(this.state.highlightedHour)
+                ? this.state.highlightedHour
+                : this.state.selectedHour,
               settings: this.state.settings,
               onHover: hover => this.handleHover(hover)
             })}
