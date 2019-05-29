@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { StaticMap } from "react-map-gl";
-import DeckGL from "deck.gl";
 
 import DropzoneComponent from "./DropzoneComponent";
-import { renderLayers } from "../util/deckgl-layers";
 import {
-  MapStylePicker,
-  LayerControls,
+  // MapStylePicker,
+  // LayerControls,
   HEXAGON_CONTROLS
 } from "../util/controls";
-import { isNumber } from "util";
 import ChartReportComponent from "./ChartReportComponent";
+import MapComponent from "./MapComponent";
 
 const initialState = {
   points: [],
@@ -96,45 +93,11 @@ class Dashboard extends Component {
 
   render() {
     console.log(this.state);
-    const { hover } = this.state;
+    // const { hover } = this.state;
     return (
       <div className="dashboard">
         <DropzoneComponent />
-        <div className="map-container">
-          {hover.hoveredObject && (
-            <div
-              className="tooltip"
-              style={{ transform: `translate(${hover.x}px, ${hover.y}px)` }}
-            >
-              <div>{hover.label}</div>
-            </div>
-          )}
-          <MapStylePicker
-            currentStyle={this.state.style}
-            onStyleChange={this.handleStyleChange}
-          />
-          <LayerControls
-            settings={this.state.settings}
-            plotTypes={HEXAGON_CONTROLS}
-            onChange={settings => this._updateLayerSettings(settings)}
-          />
-          <DeckGL
-            // width={window.innerWidth / 1.5}
-            // height={window.innerHeight}
-            layers={renderLayers({
-              data: this.props.points,
-              hour: isNumber(this.state.highlightedHour)
-                ? this.state.highlightedHour
-                : this.state.selectedHour,
-              settings: this.state.settings,
-              onHover: hover => this.handleHover(hover)
-            })}
-            initialViewState={this.props.INITIAL_VIEW_STATE}
-            controller
-          >
-            <StaticMap mapStyle={this.state.style} />
-          </DeckGL>
-        </div>
+        <MapComponent />
         {this.props.isFileUploaded ? (
           <ChartReportComponent
             {...this.state}
@@ -151,9 +114,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   rideList: state.data.rideList,
-  isFileUploaded: state.data.isFileUploaded,
-  INITIAL_VIEW_STATE: state.map.INITIAL_VIEW_STATE,
-  points: state.map.points
+  isFileUploaded: state.data.isFileUploaded
 });
 
 export default connect(mapStateToProps)(Dashboard);

@@ -1,4 +1,5 @@
 import { FILE_UPLOAD, FILE_REMOVAL } from "../actions/types";
+import { HEXAGON_CONTROLS } from "../util/controls";
 
 const initialState = {
   INITIAL_VIEW_STATE: {
@@ -16,7 +17,14 @@ const initialState = {
     x: 0,
     y: 0,
     hoveredObject: null
-  }
+  },
+  settings: Object.keys(HEXAGON_CONTROLS).reduce(
+    (accu, key) => ({
+      ...accu,
+      [key]: HEXAGON_CONTROLS[key].value
+    }),
+    {}
+  )
 };
 
 const mapReducer = (state = initialState, action) => {
