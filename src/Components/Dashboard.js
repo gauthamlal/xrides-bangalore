@@ -102,7 +102,7 @@ class Dashboard extends Component {
   };
 
   _processData = () => {
-    const data = this.state.rideList.reduce(
+    const data = this.props.rideList.reduce(
       (accu, curr) => {
         // console.log(curr.from_date);
         // console.log(new Date(curr.from_date));
@@ -163,11 +163,7 @@ class Dashboard extends Component {
     const { hover } = this.state;
     return (
       <div className="dashboard">
-        <DropzoneComponent
-          removeFile={this.handleFileRemoval}
-          isFileUploaded={!(this.state.rideList.length === 0)}
-          handleDrop={this.handleDrop}
-        />
+        <DropzoneComponent />
         <div className="map-container">
           {hover.hoveredObject && (
             <div
@@ -203,7 +199,7 @@ class Dashboard extends Component {
             <StaticMap mapStyle={this.state.style} />
           </DeckGL>
         </div>
-        {this.state.rideList.length > 0 ? (
+        {this.props.isFileUploaded ? (
           <ChartReportComponent
             {...this.state}
             highlight={hour => this.handleHighlight(hour)}
@@ -218,7 +214,8 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  rideList: state.data.rideList
+  rideList: state.data.rideList,
+  isFileUploaded: state.data.isFileUploaded
 });
 
 export default connect(mapStateToProps)(Dashboard);
