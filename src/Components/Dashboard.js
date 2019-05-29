@@ -186,8 +186,8 @@ export default class Dashboard extends Component {
             onChange={settings => this._updateLayerSettings(settings)}
           />
           <DeckGL
-            width={window.innerWidth / 1.5}
-            height={window.innerHeight}
+            // width={window.innerWidth / 1.5}
+            // height={window.innerHeight}
             layers={renderLayers({
               data: this.state.points,
               hour: isNumber(this.state.highlightedHour)
@@ -202,13 +202,17 @@ export default class Dashboard extends Component {
             <StaticMap mapStyle={this.state.style} />
           </DeckGL>
         </div>
-        <div className="chart-container">
-          <Charts
-            {...this.state}
-            highlight={hour => this.handleHighlight(hour)}
-            select={hour => this.handleChartSelect(hour)}
-          />
-        </div>
+        {this.state.rideList.length > 0 ? (
+          <div className="chart-container">
+            <Charts
+              {...this.state}
+              highlight={hour => this.handleHighlight(hour)}
+              select={hour => this.handleChartSelect(hour)}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

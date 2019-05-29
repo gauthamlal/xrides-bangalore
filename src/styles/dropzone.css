@@ -1,5 +1,5 @@
 .dropzone {
-  flex: 0 1 auto;
+  /* flex: 0 1 auto; */
   border: 2px solid black;
   border-radius: 2px;
   margin: 10px;
@@ -8,11 +8,18 @@
   cursor: pointer;
   outline: none;
   grid-row: 1 / 2;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .dropzone > p {
-  margin-left: 10px;
-  margin-right: 10px;
+  /* margin-left: 10px;
+  margin-right: 10px; */
+  /* margin: 10px; */
+  margin: 0px;
+  padding-left: 10px;
+  width: 100%;
 }
 
 .file-uploaded {
