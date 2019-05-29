@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { StaticMap } from "react-map-gl";
 import DeckGL from "deck.gl";
 // import BigNumber from "bignumber.js";
@@ -10,8 +11,8 @@ import {
   LayerControls,
   HEXAGON_CONTROLS
 } from "../util/controls";
-import Charts from "../util/charts";
 import { isNumber } from "util";
+import ChartReportComponent from "./ChartReportComponent";
 
 const INITIAL_VIEW_STATE = {
   longitude: 77.63817,
@@ -42,7 +43,7 @@ const initialState = {
   selectedHour: null
 };
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   state = {
     points: [],
     rideList: [],
@@ -203,13 +204,11 @@ export default class Dashboard extends Component {
           </DeckGL>
         </div>
         {this.state.rideList.length > 0 ? (
-          <div className="chart-container">
-            <Charts
-              {...this.state}
-              highlight={hour => this.handleHighlight(hour)}
-              select={hour => this.handleChartSelect(hour)}
-            />
-          </div>
+          <ChartReportComponent
+            {...this.state}
+            highlight={hour => this.handleHighlight(hour)}
+            select={hour => this.handleChartSelect(hour)}
+          />
         ) : (
           ""
         )}
@@ -217,3 +216,9 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  rideList: state.data.rideList
+});
+
+export default connect(mapStateToProps)(Dashboard);

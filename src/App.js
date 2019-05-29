@@ -1,16 +1,21 @@
 import React from "react";
+import { Provider } from "react-redux";
 import "./App.css";
+import "semantic-ui-css/semantic.min.css";
 
-import Dashboard from "./Components/Dashboard";
+import store from "./store";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
-    <div className="App">
-      <div className="navbar">
-        <h2>XRides Bangalore</h2>
+    <Provider store={store}>
+      <div className="App">
+        <div className="navbar">
+          <h2>XRides Bangalore</h2>
+        </div>
+        <Dashboard />
       </div>
-      <Dashboard />
-    </div>
+    </Provider>
   );
 }
 

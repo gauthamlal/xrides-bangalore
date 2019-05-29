@@ -1,5 +1,11 @@
-.chart-container {
+.chart-report {
   grid-row: 3 / -1;
+  /* position: relative; */
+  height: 100%;
+}
+
+.chart-container {
+  /* grid-row: 3 / -1; */
   position: relative;
   height: 100%;
 }
