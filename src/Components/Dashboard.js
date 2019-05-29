@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StaticMap } from "react-map-gl";
 import DeckGL from "deck.gl";
-// import BigNumber from "bignumber.js";
 
 import DropzoneComponent from "./DropzoneComponent";
 import { renderLayers } from "../util/deckgl-layers";
@@ -13,16 +12,6 @@ import {
 } from "../util/controls";
 import { isNumber } from "util";
 import ChartReportComponent from "./ChartReportComponent";
-
-const INITIAL_VIEW_STATE = {
-  longitude: 77.63817,
-  latitude: 13.00198,
-  zoom: 11,
-  minZoom: 5,
-  maxZoom: 16,
-  pitch: 0,
-  bearing: 0
-};
 
 const initialState = {
   points: [],
@@ -101,59 +90,6 @@ class Dashboard extends Component {
     });
   };
 
-  _processData = () => {
-    const data = this.props.rideList.reduce(
-      (accu, curr) => {
-        // console.log(curr.from_date);
-        // console.log(new Date(curr.from_date));
-        const pickupHour = curr.from_date
-          ? new Date(curr.from_date).getHours()
-          : null;
-        const dropoffHour = curr.to_date
-          ? new Date(curr.to_date).getHours()
-          : null;
-
-        if (curr.from_long) {
-          accu.points.push({
-            position: [Number(curr.from_long), Number(curr.from_lat)],
-            hour: pickupHour,
-            pickup: true
-          });
-        }
-        if (curr.to_long) {
-          accu.points.push({
-            position: [Number(curr.to_long), Number(curr.to_lat)],
-            hour: dropoffHour,
-            pickup: false
-          });
-        }
-        if (isNumber(pickupHour)) {
-          const prevPickups = accu.pickupObj[pickupHour] || 0;
-          accu.pickupObj[pickupHour] = prevPickups + 1;
-        }
-        if (isNumber(dropoffHour)) {
-          const prevDropoffs = accu.dropoffObj[dropoffHour] || 0;
-          accu.dropoffObj[dropoffHour] = prevDropoffs + 1;
-        }
-        return accu;
-      },
-      {
-        points: [],
-        pickupObj: {},
-        dropoffObj: {}
-      }
-    );
-
-    data.pickups = Object.entries(data.pickupObj).map(([hour, count]) => {
-      return { hour: Number(hour), x: Number(hour) + 0.5, y: count };
-    });
-
-    data.dropoffs = Object.entries(data.dropoffObj).map(([hour, count]) => {
-      return { hour: Number(hour), x: Number(hour) + 0.5, y: count };
-    });
-    this.setState(data);
-  };
-
   _updateLayerSettings = settings => {
     this.setState({ settings });
   };
@@ -186,14 +122,14 @@ class Dashboard extends Component {
             // width={window.innerWidth / 1.5}
             // height={window.innerHeight}
             layers={renderLayers({
-              data: this.state.points,
+              data: this.props.points,
               hour: isNumber(this.state.highlightedHour)
                 ? this.state.highlightedHour
                 : this.state.selectedHour,
               settings: this.state.settings,
               onHover: hover => this.handleHover(hover)
             })}
-            initialViewState={INITIAL_VIEW_STATE}
+            initialViewState={this.props.INITIAL_VIEW_STATE}
             controller
           >
             <StaticMap mapStyle={this.state.style} />
@@ -215,7 +151,9 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   rideList: state.data.rideList,
-  isFileUploaded: state.data.isFileUploaded
+  isFileUploaded: state.data.isFileUploaded,
+  INITIAL_VIEW_STATE: state.map.INITIAL_VIEW_STATE,
+  points: state.map.points
 });
 
 export default connect(mapStateToProps)(Dashboard);

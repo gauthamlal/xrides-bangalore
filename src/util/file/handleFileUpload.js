@@ -1,4 +1,5 @@
 import csv from "csv";
+// import BigNumber from "bignumber.js";
 
 const handleFileUpload = file => {
   const promise = new Promise((resolve, reject) => {
