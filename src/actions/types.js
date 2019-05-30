@@ -1,5 +1,6 @@
 export const FILE_UPLOAD = "FILE_UPLOAD";
 export const FILE_REMOVAL = "FILE_REMOVAL";
 
+export const CHANGE_MAP_STYLE = "CHANGE_MAP_STYLE";
 export const UPDATE_LAYER_SETTINGS = "UPDATE_LAYER_SETTINGS";
 export const MAP_HOVER = "MAP_HOVER";

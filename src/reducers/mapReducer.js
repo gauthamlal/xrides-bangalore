@@ -1,6 +1,7 @@
 import {
   FILE_UPLOAD,
   FILE_REMOVAL,
+  CHANGE_MAP_STYLE,
   UPDATE_LAYER_SETTINGS,
   MAP_HOVER
 } from "../actions/types";
@@ -43,6 +44,11 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         points: []
+      };
+    case CHANGE_MAP_STYLE:
+      return {
+        ...state,
+        style: action.payload
       };
     case UPDATE_LAYER_SETTINGS:
       return {

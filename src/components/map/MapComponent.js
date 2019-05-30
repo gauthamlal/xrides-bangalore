@@ -22,10 +22,7 @@ const _MapComponent = props => {
           <div>{props.hover.label}</div>
         </div>
       )}
-      <MapStylePicker
-        currentStyle={props.style}
-        // onStyleChange={this.handleStyleChange}
-      />
+      <MapStylePicker />
       <LayerControls
         plotTypes={HEXAGON_CONTROLS}
         // onChange={settings => this._updateLayerSettings(settings)}
