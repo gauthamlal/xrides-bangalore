@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Menu, Segment } from "semantic-ui-react";
 
-import Charts from "../../util/charts";
+import PickupTimeChartComponent from "./PickupTimeChartComponent";
 
-export default function ChartReportComponent(props) {
+export default function ChartReportComponent() {
   let activeItem = "bio";
 
   const handleItemClick = (e, { name }) => (activeItem = name);
@@ -39,7 +39,7 @@ export default function ChartReportComponent(props) {
         <Grid.Column stretched width={12}>
           <Segment>
             <div className="chart-container">
-              <Charts {...props} />
+              <PickupTimeChartComponent />
             </div>
           </Segment>
         </Grid.Column>

@@ -1,23 +1,16 @@
 import React from "react";
-import {
-  VerticalBarSeries,
-  XAxis,
-  YAxis,
-  XYPlot
-  // ,
-  // MarkSeries,
-  // LineSeries
-} from "react-vis";
+import { connect } from "react-redux";
+import { VerticalBarSeries, XAxis, YAxis, XYPlot } from "react-vis";
 
-export default function Charts({
-  rideList,
+const _PickupTimeChartComponent = ({
+  totalEntries,
   pickups,
-  dropoffs,
+  // dropoffs,
   highlight,
   highlightedHour,
   select,
   selectedHour
-}) {
+}) => {
   if (!pickups) {
     return <div className="chart" />;
   }
@@ -31,7 +24,7 @@ export default function Charts({
         ? "#17B8BE"
         : "#125C77"
   }));
-  const totalEntries = rideList.length;
+  // const totalEntries = rideList.length;
   return (
     <div className="chart">
       <h2>Pickups by hour</h2>
@@ -80,4 +73,19 @@ export default function Charts({
       </XYPlot>
     </div>
   );
-}
+};
+
+const mapStyleToProps = state => ({
+  totalEntries: state.data.rideList.length,
+  pickups: state.chart.pickups,
+  // highlight,
+  highlightedHour: state.chart.highlightedHour,
+  // select,
+  selectedHour: state.chart.selectedHour
+});
+
+const PickupTimeChartComponent = connect(mapStyleToProps)(
+  _PickupTimeChartComponent
+);
+
+export default PickupTimeChartComponent;

@@ -24,11 +24,11 @@ const processData = rideList => {
           pickup: false
         });
       }
-      if (!isNaN(Number(pickupHour))) {
+      if (typeof pickupHour === "number") {
         const prevPickups = accu.pickupObj[pickupHour] || 0;
         accu.pickupObj[pickupHour] = prevPickups + 1;
       }
-      if (!isNaN(Number(dropoffHour))) {
+      if (typeof dropoffHour === "number") {
         const prevDropoffs = accu.dropoffObj[dropoffHour] || 0;
         accu.dropoffObj[dropoffHour] = prevDropoffs + 1;
       }
