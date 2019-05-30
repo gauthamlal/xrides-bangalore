@@ -5,6 +5,7 @@ import { Grid, Menu, Segment } from "semantic-ui-react";
 import PickupTimeChartComponent from "./PickupTimeChartComponent";
 import { changeActiveChart } from "../../actions/chartActions";
 import MediumOfBookingChartComponent from "./MediumOfBookingChartComponent";
+import RidesByMonthChartComponent from "./RidesByMonthChartComponent";
 
 const _ChartReportComponent = props => {
   const { activeChart, changeActiveChart } = props;
@@ -19,6 +20,9 @@ const _ChartReportComponent = props => {
       break;
     case "pics":
       chartToShow = <MediumOfBookingChartComponent />;
+      break;
+    case "companies":
+      chartToShow = <RidesByMonthChartComponent />;
       break;
     default:
       chartToShow = <PickupTimeChartComponent />;
