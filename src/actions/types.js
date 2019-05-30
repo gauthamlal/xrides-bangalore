@@ -2,3 +2,4 @@ export const FILE_UPLOAD = "FILE_UPLOAD";
 export const FILE_REMOVAL = "FILE_REMOVAL";
 
 export const UPDATE_LAYER_SETTINGS = "UPDATE_LAYER_SETTINGS";
+export const MAP_HOVER = "MAP_HOVER";

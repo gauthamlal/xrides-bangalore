@@ -6,9 +6,7 @@ import { updateLayerSettings } from "../../actions/mapActions";
 const _LayerControls = props => {
   const handleValueChange = (settingName, newValue) => {
     const { settings } = props;
-    // Only update if we have a confirmed change
     if (settings[settingName] !== newValue) {
-      // Create a new object so that shallow-equal detects a change
       const newSettings = {
         ...props.settings,
         [settingName]: newValue

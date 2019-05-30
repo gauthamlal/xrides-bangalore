@@ -7,7 +7,7 @@ import { renderLayers } from "../../util/deckgl-layers";
 import MapStylePicker from "./MapStylePicker";
 import LayerControls from "./LayerControls";
 import { HEXAGON_CONTROLS } from "../../util/map/controls";
-// import La from "./LayerControls"
+import { mapHover } from "../../actions/mapActions";
 
 const _MapComponent = props => {
   return (
@@ -38,8 +38,8 @@ const _MapComponent = props => {
           // hour: !isNaN(Number(this.state.highlightedHour))
           //   ? this.state.highlightedHour
           //   : this.state.selectedHour,
-          settings: props.settings
-          // onHover: hover => this.handleHover(hover)
+          settings: props.settings,
+          onHover: hover => props.mapHover(hover)
         })}
         initialViewState={props.INITIAL_VIEW_STATE}
         controller
@@ -58,5 +58,8 @@ const mapStateToProps = state => ({
   settings: state.map.settings
 });
 
-const MapComponent = connect(mapStateToProps)(_MapComponent);
+const MapComponent = connect(
+  mapStateToProps,
+  { mapHover }
+)(_MapComponent);
 export default MapComponent;

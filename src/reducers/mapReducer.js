@@ -1,7 +1,8 @@
 import {
   FILE_UPLOAD,
   FILE_REMOVAL,
-  UPDATE_LAYER_SETTINGS
+  UPDATE_LAYER_SETTINGS,
+  MAP_HOVER
 } from "../actions/types";
 import { HEXAGON_CONTROLS } from "../util/map/controls";
 
@@ -47,6 +48,11 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         settings: action.payload
+      };
+    case MAP_HOVER:
+      return {
+        ...state,
+        hover: action.payload.hover
       };
     default:
       return state;
