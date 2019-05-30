@@ -2,7 +2,8 @@ import {
   FILE_UPLOAD,
   FILE_REMOVAL,
   CHART_HIGHLIGHT,
-  CHART_SELECT
+  CHART_SELECT,
+  CHANGE_ACTIVE_CHART
 } from "../actions/types";
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   pickups: [],
   dropoffs: [],
   selectedHour: null,
-  highlightedHour: null
+  highlightedHour: null,
+  activeChart: "bio"
 };
 
 const chartReducer = (state = initialState, action) => {
@@ -36,6 +38,11 @@ const chartReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedHour: action.payload
+      };
+    case CHANGE_ACTIVE_CHART:
+      return {
+        ...state,
+        activeChart: action.payload
       };
     default:
       return state;

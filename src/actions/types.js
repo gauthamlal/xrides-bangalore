@@ -7,3 +7,4 @@ export const MAP_HOVER = "MAP_HOVER";
 
 export const CHART_HIGHLIGHT = "CHART_HIGHLIGHT";
 export const CHART_SELECT = "CHART_SELECT";
+export const CHANGE_ACTIVE_CHART = "CHANGE_ACTIVE_CHART";

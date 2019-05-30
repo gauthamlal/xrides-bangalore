@@ -1,13 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Grid, Menu, Segment } from "semantic-ui-react";
 
 import PickupTimeChartComponent from "./PickupTimeChartComponent";
+import { changeActiveChart } from "../../actions/chartActions";
 
-export default function ChartReportComponent() {
-  let activeItem = "bio";
-
+const _ChartReportComponent = props => {
+  const { activeChart, changeActiveChart } = props;
   const handleItemClick = (e, { name }) => {
-    activeItem = name;
+    changeActiveChart(name);
   };
 
   return (
@@ -17,23 +18,23 @@ export default function ChartReportComponent() {
           <Menu fluid vertical tabular>
             <Menu.Item
               name="bio"
-              active={activeItem === "bio"}
+              active={activeChart === "bio"}
               onClick={handleItemClick}
             />
             <Menu.Item
               name="pics"
-              active={activeItem === "pics"}
+              active={activeChart === "pics"}
               onClick={handleItemClick}
               className=".menu-item"
             />
             <Menu.Item
               name="companies"
-              active={activeItem === "companies"}
+              active={activeChart === "companies"}
               onClick={handleItemClick}
             />
             <Menu.Item
               name="links"
-              active={activeItem === "links"}
+              active={activeChart === "links"}
               onClick={handleItemClick}
             />
           </Menu>
@@ -49,4 +50,14 @@ export default function ChartReportComponent() {
       </Grid>
     </div>
   );
-}
+};
+
+const mapStateToProps = state => ({
+  activeChart: state.chart.activeChart
+});
+
+const ChartReportComponent = connect(
+  mapStateToProps,
+  { changeActiveChart }
+)(_ChartReportComponent);
+export default ChartReportComponent;
