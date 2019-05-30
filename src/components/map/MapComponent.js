@@ -32,9 +32,10 @@ const _MapComponent = props => {
         // height={window.innerHeight}
         layers={renderLayers({
           data: props.points,
-          // hour: !isNaN(Number(this.state.highlightedHour))
-          //   ? this.state.highlightedHour
-          //   : this.state.selectedHour,
+          hour:
+            typeof props.highlightedHour === "number"
+              ? props.highlightedHour
+              : props.selectedHour,
           settings: props.settings,
           onHover: hover => props.mapHover(hover)
         })}
@@ -52,7 +53,9 @@ const mapStateToProps = state => ({
   points: state.map.points,
   hover: state.map.hover,
   style: state.map.style,
-  settings: state.map.settings
+  settings: state.map.settings,
+  highlightedHour: state.chart.highlightedHour,
+  selectedHour: state.chart.selectedHour
 });
 
 const MapComponent = connect(

@@ -1,4 +1,9 @@
-import { FILE_UPLOAD, FILE_REMOVAL } from "../actions/types";
+import {
+  FILE_UPLOAD,
+  FILE_REMOVAL,
+  CHART_HIGHLIGHT,
+  CHART_SELECT
+} from "../actions/types";
 
 const initialState = {
   pickupObj: {},
@@ -22,6 +27,16 @@ const chartReducer = (state = initialState, action) => {
       };
     case FILE_REMOVAL:
       return initialState;
+    case CHART_HIGHLIGHT:
+      return {
+        ...state,
+        highlightedHour: action.payload
+      };
+    case CHART_SELECT:
+      return {
+        ...state,
+        selectedHour: action.payload
+      };
     default:
       return state;
   }

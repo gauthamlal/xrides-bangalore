@@ -2,13 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { VerticalBarSeries, XAxis, YAxis, XYPlot } from "react-vis";
 
+import { chartHighlight, chartSelect } from "../../actions/chartActions";
+
 const _PickupTimeChartComponent = ({
   totalEntries,
   pickups,
   // dropoffs,
-  highlight,
+  chartHighlight,
   highlightedHour,
-  select,
+  chartSelect,
   selectedHour
 }) => {
   if (!pickups) {
@@ -24,7 +26,11 @@ const _PickupTimeChartComponent = ({
         ? "#17B8BE"
         : "#125C77"
   }));
-  // const totalEntries = rideList.length;
+
+  const handleChartSelect = hour => {
+    chartSelect(selectedHour === hour ? null : hour);
+  };
+
   return (
     <div className="chart">
       <h2>Pickups by hour</h2>
@@ -64,9 +70,9 @@ const _PickupTimeChartComponent = ({
         <VerticalBarSeries
           colorType="literal"
           data={data}
-          onValueMouseOver={d => highlight(d.hour)}
-          onValueMouseOut={() => highlight(null)}
-          onValueClick={d => select(d.hour)}
+          onValueMouseOver={d => chartHighlight(d.hour)}
+          onValueMouseOut={() => chartHighlight(null)}
+          onValueClick={d => handleChartSelect(d.hour)}
           style={{ cursor: "pointer" }}
         />
         {/* <LineSeries data={dropoffs} color="#f08" /> */}
@@ -78,14 +84,13 @@ const _PickupTimeChartComponent = ({
 const mapStyleToProps = state => ({
   totalEntries: state.data.rideList.length,
   pickups: state.chart.pickups,
-  // highlight,
   highlightedHour: state.chart.highlightedHour,
-  // select,
   selectedHour: state.chart.selectedHour
 });
 
-const PickupTimeChartComponent = connect(mapStyleToProps)(
-  _PickupTimeChartComponent
-);
+const PickupTimeChartComponent = connect(
+  mapStyleToProps,
+  { chartHighlight, chartSelect }
+)(_PickupTimeChartComponent);
 
 export default PickupTimeChartComponent;
