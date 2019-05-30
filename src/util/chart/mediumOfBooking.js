@@ -19,14 +19,17 @@ const mediumOfBooking = rideList => {
     [
       {
         label: "Online Booking",
+        type: "online_booking",
         angle: 0
       },
       {
         label: "Mobile Site Booking",
+        type: "mobile_site_booking",
         angle: 0
       },
       {
         label: "Other Modes",
+        type: "others",
         angle: 0
       }
     ]

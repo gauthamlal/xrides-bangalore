@@ -1,4 +1,9 @@
-import { CHART_HIGHLIGHT, CHART_SELECT, CHANGE_ACTIVE_CHART } from "./types";
+import {
+  CHART_HIGHLIGHT,
+  CHART_SELECT,
+  CHANGE_ACTIVE_CHART,
+  MODE_HIGHLIGHT
+} from "./types";
 
 export const chartHighlight = hour => dispatch => {
   dispatch({
@@ -14,11 +19,18 @@ export const chartSelect = hour => dispatch => {
   });
 };
 
-export const changeActiveChart = obj => dispatch => {
-  console.log(obj);
+export const changeActiveChart = tab => dispatch => {
+  // console.log(obj);
 
   dispatch({
     type: CHANGE_ACTIVE_CHART,
-    payload: obj
+    payload: tab
+  });
+};
+
+export const modeHighlight = mode => dispatch => {
+  dispatch({
+    type: MODE_HIGHLIGHT,
+    payload: mode
   });
 };

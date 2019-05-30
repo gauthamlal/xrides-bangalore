@@ -22,8 +22,10 @@ const LIGHT_SETTINGS = {
 const elevationRange = [0, 1000];
 
 export function renderLayers(props) {
-  const { data, hour, onHover, settings } = props;
-  const filteredData = hour === null ? data : data.filter(d => d.hour === hour);
+  const { data, hour, mode, onHover, settings } = props;
+  let filteredData = hour === null ? data : data.filter(d => d.hour === hour);
+  filteredData =
+    mode === null ? filteredData : filteredData.filter(d => d.mode === mode);
   // console.log(hour);
   // console.log(filteredData);
 

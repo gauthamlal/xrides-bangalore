@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { RadialChart, Hint } from "react-vis";
+
 import mediumOfBooking from "../../util/chart/mediumOfBooking";
+import { modeHighlight } from "../../actions/chartActions";
 
 const _MediumOfBookingChartComponent = props => {
   const [value, setValue] = useState(false);
 
   const handleHover = value => {
     setValue(value);
+    value ? props.modeHighlight(value.type) : props.modeHighlight(null);
   };
 
   const data = mediumOfBooking(props.rideList);
@@ -47,8 +50,9 @@ const mapStateToProps = state => ({
   rideList: state.data.rideList
 });
 
-const MediumOfBookingChartComponent = connect(mapStateToProps)(
-  _MediumOfBookingChartComponent
-);
+const MediumOfBookingChartComponent = connect(
+  mapStateToProps,
+  { modeHighlight }
+)(_MediumOfBookingChartComponent);
 
 export default MediumOfBookingChartComponent;

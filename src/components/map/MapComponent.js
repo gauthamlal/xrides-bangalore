@@ -37,6 +37,7 @@ const _MapComponent = props => {
               ? props.highlightedHour
               : props.selectedHour,
           settings: props.settings,
+          mode: props.highlightedMode,
           onHover: hover => props.mapHover(hover)
         })}
         initialViewState={props.INITIAL_VIEW_STATE}
@@ -55,7 +56,8 @@ const mapStateToProps = state => ({
   style: state.map.style,
   settings: state.map.settings,
   highlightedHour: state.chart.highlightedHour,
-  selectedHour: state.chart.selectedHour
+  selectedHour: state.chart.selectedHour,
+  highlightedMode: state.chart.highlightedMode
 });
 
 const MapComponent = connect(
