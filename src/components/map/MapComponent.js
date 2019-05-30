@@ -3,12 +3,11 @@ import { connect } from "react-redux";
 import { StaticMap } from "react-map-gl";
 import DeckGL from "deck.gl";
 
-import { renderLayers } from "../util/deckgl-layers";
-import {
-  MapStylePicker,
-  LayerControls,
-  HEXAGON_CONTROLS
-} from "../util/controls";
+import { renderLayers } from "../../util/deckgl-layers";
+import MapStylePicker from "./MapStylePicker";
+import LayerControls from "./LayerControls";
+import { HEXAGON_CONTROLS } from "../../util/map/controls";
+// import La from "./LayerControls"
 
 const _MapComponent = props => {
   return (
@@ -28,7 +27,6 @@ const _MapComponent = props => {
         // onStyleChange={this.handleStyleChange}
       />
       <LayerControls
-        settings={props.settings}
         plotTypes={HEXAGON_CONTROLS}
         // onChange={settings => this._updateLayerSettings(settings)}
       />

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Dropzone from "react-dropzone";
 
-import { uploadFile, removeFile } from "../actions/fileActions";
+import { uploadFile, removeFile } from "../../actions/fileActions";
 
 const _DropzoneComponent = props => {
   // console.log(props);

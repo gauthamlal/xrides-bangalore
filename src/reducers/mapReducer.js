@@ -1,5 +1,9 @@
-import { FILE_UPLOAD, FILE_REMOVAL } from "../actions/types";
-import { HEXAGON_CONTROLS } from "../util/controls";
+import {
+  FILE_UPLOAD,
+  FILE_REMOVAL,
+  UPDATE_LAYER_SETTINGS
+} from "../actions/types";
+import { HEXAGON_CONTROLS } from "../util/map/controls";
 
 const initialState = {
   INITIAL_VIEW_STATE: {
@@ -38,6 +42,11 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         points: []
+      };
+    case UPDATE_LAYER_SETTINGS:
+      return {
+        ...state,
+        settings: action.payload
       };
     default:
       return state;

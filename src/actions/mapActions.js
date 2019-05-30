@@ -1,3 +1,8 @@
-import { FILE_UPLOAD, FILE_REMOVAL } from "./types";
+import { UPDATE_LAYER_SETTINGS } from "./types";
 
-const processData = () => dispatch => {};
+export const updateLayerSettings = settings => dispatch => {
+  dispatch({
+    type: UPDATE_LAYER_SETTINGS,
+    payload: settings
+  });
+};

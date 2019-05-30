@@ -4,7 +4,7 @@ import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 
 import store from "./store";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/layout/Dashboard";
 
 function App() {
   return (

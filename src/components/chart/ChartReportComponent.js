@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Menu, Segment } from "semantic-ui-react";
 
-import Charts from "../util/charts";
+import Charts from "../../util/charts";
 
 export default function ChartReportComponent(props) {
   let activeItem = "bio";

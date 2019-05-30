@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import DropzoneComponent from "./DropzoneComponent";
-import {
-  // MapStylePicker,
-  // LayerControls,
-  HEXAGON_CONTROLS
-} from "../util/controls";
-import ChartReportComponent from "./ChartReportComponent";
-import MapComponent from "./MapComponent";
+import DropzoneComponent from "../file/DropzoneComponent";
+import ChartReportComponent from "../chart/ChartReportComponent";
+import MapComponent from "../map/MapComponent";
+import { HEXAGON_CONTROLS } from "../../util/map/controls";
 
 const initialState = {
   points: [],
