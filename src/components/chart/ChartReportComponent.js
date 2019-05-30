@@ -6,7 +6,9 @@ import PickupTimeChartComponent from "./PickupTimeChartComponent";
 export default function ChartReportComponent() {
   let activeItem = "bio";
 
-  const handleItemClick = (e, { name }) => (activeItem = name);
+  const handleItemClick = (e, { name }) => {
+    activeItem = name;
+  };
 
   return (
     <div className="chart-report">
@@ -22,6 +24,7 @@ export default function ChartReportComponent() {
               name="pics"
               active={activeItem === "pics"}
               onClick={handleItemClick}
+              className=".menu-item"
             />
             <Menu.Item
               name="companies"

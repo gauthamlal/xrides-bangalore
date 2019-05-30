@@ -38,7 +38,7 @@ const _PickupTimeChartComponent = ({
       <XYPlot
         height={140}
         width={480}
-        // margin={{ left: 40, right: 25, top: 10, bottom: 35 }}
+        margin={{ left: 40, right: 25, top: 10, bottom: 35 }}
         // yDomain={[0, 5]}
         // onMouseLeave={() => highlight(null)}
       >
