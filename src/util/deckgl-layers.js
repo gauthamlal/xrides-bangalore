@@ -24,8 +24,8 @@ const elevationRange = [0, 1000];
 export function renderLayers(props) {
   const { data, hour, onHover, settings } = props;
   const filteredData = hour === null ? data : data.filter(d => d.hour === hour);
-  console.log(hour);
-  console.log(filteredData);
+  // console.log(hour);
+  // console.log(filteredData);
 
   return [
     settings.showScatterplot &&

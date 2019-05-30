@@ -7,10 +7,10 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  pickupObj: {},
-  dropoffObj: {},
-  pickups: [],
-  dropoffs: [],
+  // pickupObj: {},
+  // dropoffObj: {},
+  // pickups: [],
+  // dropoffs: [],
   selectedHour: null,
   highlightedHour: null,
   activeChart: "bio"
@@ -19,13 +19,12 @@ const initialState = {
 const chartReducer = (state = initialState, action) => {
   switch (action.type) {
     case FILE_UPLOAD:
-      console.log(action.payload);
       return {
-        ...state,
-        pickupObj: action.payload.pickupObj,
-        dropoffObj: action.payload.dropoffObj,
-        pickups: action.payload.pickups,
-        dropoffs: action.payload.dropoffs
+        ...state
+        // pickupObj: action.payload.pickupObj,
+        // dropoffObj: action.payload.dropoffObj,
+        // pickups: action.payload.pickups,
+        // dropoffs: action.payload.dropoffs
       };
     case FILE_REMOVAL:
       return initialState;

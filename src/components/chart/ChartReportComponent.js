@@ -4,12 +4,26 @@ import { Grid, Menu, Segment } from "semantic-ui-react";
 
 import PickupTimeChartComponent from "./PickupTimeChartComponent";
 import { changeActiveChart } from "../../actions/chartActions";
+import MediumOfBookingChartComponent from "./MediumOfBookingChartComponent";
 
 const _ChartReportComponent = props => {
   const { activeChart, changeActiveChart } = props;
   const handleItemClick = (e, { name }) => {
     changeActiveChart(name);
   };
+
+  let chartToShow = "";
+  switch (activeChart) {
+    case "bio":
+      chartToShow = <PickupTimeChartComponent />;
+      break;
+    case "pics":
+      chartToShow = <MediumOfBookingChartComponent />;
+      break;
+    default:
+      chartToShow = <PickupTimeChartComponent />;
+      break;
+  }
 
   return (
     <div className="chart-report">
@@ -42,9 +56,7 @@ const _ChartReportComponent = props => {
 
         <Grid.Column stretched width={12}>
           <Segment>
-            <div className="chart-container">
-              <PickupTimeChartComponent />
-            </div>
+            <div className="chart-container">{chartToShow}</div>
           </Segment>
         </Grid.Column>
       </Grid>

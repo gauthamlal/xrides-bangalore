@@ -3,19 +3,20 @@ import { connect } from "react-redux";
 import { VerticalBarSeries, XAxis, YAxis, XYPlot } from "react-vis";
 
 import { chartHighlight, chartSelect } from "../../actions/chartActions";
+import pickupTimeData from "../../util/chart/pickupTimeData";
 
 const _PickupTimeChartComponent = ({
-  totalEntries,
-  pickups,
-  // dropoffs,
+  rideList,
   chartHighlight,
   highlightedHour,
   chartSelect,
   selectedHour
 }) => {
+  const { pickups } = pickupTimeData(rideList);
   if (!pickups) {
     return <div className="chart" />;
   }
+  const totalEntries = rideList.length;
 
   const data = pickups.map(d => ({
     ...d,
@@ -82,8 +83,7 @@ const _PickupTimeChartComponent = ({
 };
 
 const mapStyleToProps = state => ({
-  totalEntries: state.data.rideList.length,
-  pickups: state.chart.pickups,
+  rideList: state.data.rideList,
   highlightedHour: state.chart.highlightedHour,
   selectedHour: state.chart.selectedHour
 });

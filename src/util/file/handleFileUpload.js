@@ -17,6 +17,10 @@ const handleFileUpload = file => {
             item.forEach((rideInfo, i) => {
               rideObject[headers[i]] = rideInfo === "NULL" ? null : rideInfo;
             });
+            rideObject.online_booking = Number(rideObject.online_booking);
+            rideObject.mobile_site_booking = Number(
+              rideObject.mobile_site_booking
+            );
             return rideObject;
           });
           /*

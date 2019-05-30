@@ -35,3 +35,7 @@
 .item {
   height: 70px;
 }
+
+.medium-tooltip {
+  text-align: center;
+}
