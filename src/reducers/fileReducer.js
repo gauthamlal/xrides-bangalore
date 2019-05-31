@@ -2,7 +2,8 @@ import { FILE_UPLOAD, FILE_REMOVAL } from "../actions/types";
 
 const initialState = {
   rideList: [],
-  isFileUploaded: false
+  isFileUploaded: false,
+  fileError: null
 };
 
 const fileReducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const fileReducer = (state = initialState, action) => {
       return {
         ...state,
         rideList: action.payload.rideList,
-        isFileUploaded: action.payload.isFileUploaded
+        isFileUploaded: action.payload.isFileUploaded,
+        fileError: action.payload.fileError
       };
     case FILE_REMOVAL:
       return {

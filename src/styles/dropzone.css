@@ -19,7 +19,7 @@
   margin-right: 10px; */
   /* margin: 10px; */
   margin: 0px;
-  padding-left: 10px;
+  padding: 0px 10px;
   /* width: 100%; */
 }
 
@@ -27,6 +27,19 @@
   display: flex;
   justify-content: space-between;
   cursor: initial;
+  background-color: #29ca4f;
+  border-color: #26bb48;
+  color: white;
+  font-size: 16px;
+}
+
+.file-error {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  background-color: #dc3545;
+  border-color: #ad2532;
+  color: white;
+  font-size: 16px;
 }
 
 .remove-file {
@@ -36,5 +49,5 @@
 }
 
 .remove-file:hover {
-  color: gray;
+  color: #19702e;
 }

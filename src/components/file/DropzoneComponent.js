@@ -5,8 +5,6 @@ import Dropzone from "react-dropzone";
 import { uploadFile, removeFile } from "../../actions/fileActions";
 
 const _DropzoneComponent = props => {
-  // console.log(props);
-
   const handleDrop = files => {
     const file = files[0];
     // DISPLAY FILE NAME
@@ -27,12 +25,25 @@ const _DropzoneComponent = props => {
     <Dropzone accept=".csv" onDrop={acceptedFiles => handleDrop(acceptedFiles)}>
       {({ getRootProps, getInputProps }) => (
         // <section className="dropzone">
-        <div className="dropzone" {...getRootProps()}>
+        <div
+          className={props.fileError ? "dropzone file-error" : "dropzone"}
+          {...getRootProps()}
+        >
           <input {...getInputProps()} />
-          <p>
+          {props.fileError ? (
+            <p>
+              Incorrect file type uploaded. Click to select the correct file.
+            </p>
+          ) : (
+            <p>
+              Click to select your{" "}
+              <span style={{ fontWeight: "bold" }}>.CSV</span> file
+            </p>
+          )}
+          {/* <p>
             Click to select your{" "}
             <span style={{ fontWeight: "bold" }}>.CSV</span> file
-          </p>
+          </p> */}
         </div>
         // </section>
       )}
@@ -44,7 +55,8 @@ const _DropzoneComponent = props => {
 
 const mapStateToProps = state => ({
   rideList: state.data.rideList,
-  isFileUploaded: state.data.isFileUploaded
+  isFileUploaded: state.data.isFileUploaded,
+  fileError: state.data.fileError
 });
 
 const DropzoneComponent = connect(

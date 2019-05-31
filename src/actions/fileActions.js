@@ -9,6 +9,7 @@ export const uploadFile = file => dispatch => {
       const payload = { ...data };
       payload.rideList = res.rideList;
       payload.isFileUploaded = true;
+      payload.error = null;
       dispatch({
         type: FILE_UPLOAD,
         payload
@@ -18,6 +19,7 @@ export const uploadFile = file => dispatch => {
       const payload = {};
       payload.rideList = [];
       payload.isFileUploaded = false;
+      payload.fileError = "Incorrect file type uploaded";
       dispatch({
         type: FILE_UPLOAD,
         payload
