@@ -16,14 +16,16 @@ const LIGHT_SETTINGS = {
   diffuseRatio: 0.6,
   specularRatio: 0.2,
   lightsStrength: [0.8, 0.0, 0.8, 0.0],
-  numberOfLights: 2
+  numberOfLights: 5
 };
 
 const elevationRange = [0, 1000];
 
 export function renderLayers(props) {
   const { data, hour, mode, onHover, settings } = props;
-  let filteredData = hour === null ? data : data.filter(d => d.hour === hour);
+
+  let filteredData =
+    hour === null ? data : data.filter(d => d.hour === hour && d.pickup);
   filteredData =
     mode === null ? filteredData : filteredData.filter(d => d.mode === mode);
   // console.log(hour);

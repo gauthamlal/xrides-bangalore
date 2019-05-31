@@ -45,9 +45,15 @@ const _MapComponent = props => {
   }, [props.rideList]);
 
   const handleHover = ({ x, y, object }) => {
+    console.log(object);
+
     const label = object
       ? object.points
-        ? `${object.points.length} pickups or dropoffs here`
+        ? `${object.points.length} ${
+            props.highlightedHour || props.selectedHour
+              ? "pickups"
+              : "pickups or dropoffs"
+          }  here`
         : object.pickup
         ? "Pickup"
         : "Dropoff"
