@@ -14,6 +14,8 @@ const _MediumOfBookingChartComponent = props => {
   };
 
   const data = mediumOfBooking(props.rideList);
+
+  const totalEntries = props.rideList.length;
   return (
     <div>
       <RadialChart
@@ -37,6 +39,7 @@ const _MediumOfBookingChartComponent = props => {
             >
               <h4>Mode of Booking</h4>
               <p>{value.label}</p>
+              <p>{((value.number / totalEntries) * 100).toFixed(2) + "%"}</p>
             </div>
           </Hint>
           // </div>

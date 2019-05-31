@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "bignumber.js": "^8.1.1",
     "csv": "^5.1.1",
     "deck.gl": "^7.0.9",

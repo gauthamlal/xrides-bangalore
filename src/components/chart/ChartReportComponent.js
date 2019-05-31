@@ -38,23 +38,33 @@ const _ChartReportComponent = props => {
               name="bio"
               active={activeChart === "bio"}
               onClick={handleItemClick}
-            />
+            >
+              <span className="menu-item">
+                <i className="fas fa-car" style={{ fontSize: "48px" }} />
+                <span>Pickups</span>
+              </span>
+            </Menu.Item>
             <Menu.Item
               name="pics"
               active={activeChart === "pics"}
               onClick={handleItemClick}
-              className=".menu-item"
-            />
+              // className=".menu-item"
+            >
+              <span className="menu-item">
+                <i className="fas fa-desktop" style={{ fontSize: "48px" }} />
+                <span>Device</span>
+              </span>
+            </Menu.Item>
             <Menu.Item
               name="companies"
               active={activeChart === "companies"}
               onClick={handleItemClick}
-            />
-            <Menu.Item
-              name="links"
-              active={activeChart === "links"}
-              onClick={handleItemClick}
-            />
+            >
+              <span className="menu-item">
+                <i className="fas fa-calendar" style={{ fontSize: "48px" }} />
+                <span>Monthly</span>
+              </span>
+            </Menu.Item>
           </Menu>
         </Grid.Column>
 

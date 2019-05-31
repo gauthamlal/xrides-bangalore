@@ -2,6 +2,7 @@
 @import url("./styles/mapStyles.css");
 @import url("./styles/charts.css");
 @import "../node_modules/react-vis/dist/style.css";
+@import url("../node_modules/@fortawesome/fontawesome-free/css/all.min.css");
 
 html,
 body,

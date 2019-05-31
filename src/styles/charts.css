@@ -26,16 +26,18 @@
   height: 230px;
   padding: 10px;
   position: absolute;
-  /* left: 20px; */
-  /* top: 20px; */
   width: 500px;
   z-index: 100;
 }
 
-.item {
-  height: 70px;
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.medium-tooltip {
-  text-align: center;
+.menu-item > span {
+  margin-top: 5px;
 }
