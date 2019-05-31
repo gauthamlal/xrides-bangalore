@@ -1,3 +1,18 @@
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
+
 const ridesByMonth = rideList => {
   const data = rideList.reduce(
     (accu, curr) => {
@@ -17,7 +32,7 @@ const ridesByMonth = rideList => {
     }
   );
   data.monthArr = Object.entries(data.monthObj).map(([month, count]) => ({
-    x: month,
+    x: months[month],
     y: count
   }));
   return data.monthArr;

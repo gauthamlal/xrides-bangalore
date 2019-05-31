@@ -1,6 +1,7 @@
 @import url("./styles/dropzone.css");
 @import url("./styles/mapStyles.css");
 @import url("./styles/charts.css");
+@import "../node_modules/react-vis/dist/style.css";
 
 html,
 body,
