@@ -17,13 +17,32 @@
   font-family: 'ff-clan-web-pro, "Helvetica Neue", Helvetica, sans-serif !important';
   font-size: 12px;
   line-height: 1.833;
-  width: 200px;
+  width: auto;
   position: absolute;
   top: 20px;
   right: 20px;
   padding: 20px;
   z-index: 100;
   background: white;
+}
+
+.checkbox {
+  transform: scale(0.75);
+}
+/* .checkbox label:after {
+  transform: scale(0.5);
+} */
+
+.controls-toggle__holder {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  font-size: 16px;
+}
+
+.controls-toggle {
+  cursor: pointer;
 }
 
 .tooltip {

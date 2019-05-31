@@ -32,7 +32,8 @@ const initialState = {
       [key]: HEXAGON_CONTROLS[key].value
     }),
     {}
-  )
+  ),
+  showSettings: false
 };
 
 const _MapComponent = props => {
@@ -61,9 +62,14 @@ const _MapComponent = props => {
   };
 
   const handleLayerSettings = settings => {
-    console.log(settings);
-
     setMapState(prevState => ({ ...prevState, settings }));
+  };
+
+  const handleSettingsToggle = () => {
+    setMapState(prevState => ({
+      ...prevState,
+      showSettings: !prevState.showSettings
+    }));
   };
 
   return (
@@ -80,6 +86,8 @@ const _MapComponent = props => {
       )}
       <MapStylePicker style={mapState.style} changeMapStyle={handleMapStyle} />
       <LayerControls
+        showSettings={mapState.showSettings}
+        toggleSettings={handleSettingsToggle}
         plotTypes={HEXAGON_CONTROLS}
         settings={mapState.settings}
         handleLayerSettings={handleLayerSettings}

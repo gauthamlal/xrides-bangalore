@@ -1,4 +1,5 @@
 import React from "react";
+import { Checkbox as SemanticCheckbox } from "semantic-ui-react";
 
 const LayerControls = props => {
   const handleValueChange = (settingName, newValue) => {
@@ -13,10 +14,13 @@ const LayerControls = props => {
     }
   };
 
-  const { settings, plotTypes = {} } = props;
+  const { showSettings, toggleSettings, settings, plotTypes = {} } = props;
 
-  return (
+  const jsx = showSettings ? (
     <div className="layer-controls">
+      <div className="controls-toggle__holder">
+        <i className="controls-toggle fas fa-times" onClick={toggleSettings} />
+      </div>
       {Object.keys(settings).map(key => (
         <div key={key}>
           <label>{plotTypes[key].displayName}</label>
@@ -32,7 +36,13 @@ const LayerControls = props => {
         </div>
       ))}
     </div>
+  ) : (
+    <div className="layer-controls controls-toggle__holder">
+      <i className="controls-toggle fas fa-cog" onClick={toggleSettings} />
+    </div>
   );
+
+  return jsx;
 };
 
 const Setting = props => {
@@ -54,12 +64,18 @@ const Checkbox = ({ settingName, value, onChange }) => {
   return (
     <div key={settingName}>
       <div className="input-group">
-        <input
-          type="checkbox"
+        <SemanticCheckbox
+          toggle
           id={settingName}
           checked={value}
           onChange={e => onChange(settingName, e.target.checked)}
         />
+        {/* <input
+          type="checkbox"
+          id={settingName}
+          checked={value}
+          onChange={e => onChange(settingName, e.target.checked)}
+        /> */}
       </div>
     </div>
   );
