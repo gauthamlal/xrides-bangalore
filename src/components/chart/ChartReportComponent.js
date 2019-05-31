@@ -36,6 +36,7 @@ const ChartReportComponent = () => {
             <Menu.Item
               name="pickup"
               active={activeChart === "pickup"}
+              style={activeChart !== "pickup" ? { color: "white" } : {}}
               onClick={handleItemClick}
             >
               <span className="menu-item">
@@ -46,8 +47,8 @@ const ChartReportComponent = () => {
             <Menu.Item
               name="medium"
               active={activeChart === "medium"}
+              style={activeChart !== "medium" ? { color: "white" } : {}}
               onClick={handleItemClick}
-              // className=".menu-item"
             >
               <span className="menu-item">
                 <i className="fas fa-desktop" style={{ fontSize: "48px" }} />
@@ -58,6 +59,7 @@ const ChartReportComponent = () => {
               name="monthly"
               active={activeChart === "monthly"}
               onClick={handleItemClick}
+              style={activeChart !== "monthly" ? { color: "white" } : {}}
             >
               <span className="menu-item">
                 <i className="fas fa-calendar" style={{ fontSize: "48px" }} />
