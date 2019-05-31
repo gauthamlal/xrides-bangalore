@@ -13,13 +13,16 @@ const fileReducer = (state = initialState, action) => {
         ...state,
         rideList: action.payload.rideList,
         isFileUploaded: action.payload.isFileUploaded,
-        fileError: action.payload.fileError
+        fileError: action.payload.fileError,
+        fileName: action.payload.fileError ? null : action.payload.fileName
       };
     case FILE_REMOVAL:
       return {
         ...state,
         rideList: [],
-        isFileUploaded: false
+        isFileUploaded: false,
+        fileError: null,
+        fileName: null
       };
     default:
       return state;

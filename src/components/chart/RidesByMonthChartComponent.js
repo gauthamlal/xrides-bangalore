@@ -36,15 +36,11 @@ const _RidesByMonthChartComponent = props => {
           data={data}
           style={{ stroke: "violet", strokeWidth: 3 }}
           onNearestX={v => {
-            console.log(v.x, value.x);
-
             if (v.x !== value.x) {
               setValue(v);
             }
           }}
           onSeriesMouseOut={v => {
-            console.log("OUT");
-
             setValue(false);
           }}
         />

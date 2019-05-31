@@ -1,29 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Dropzone from "react-dropzone";
 
 import { uploadFile, removeFile } from "../../actions/fileActions";
 
 const _DropzoneComponent = props => {
-  const [fileName, setFileName] = useState(null);
+  // const [fileName, setFileName] = useState(null);
 
   const handleDrop = files => {
     const file = files[0];
-
-    setFileName(file.name);
     props.uploadFile(file);
   };
 
   const handleRemove = () => {
-    setFileName(null);
     props.removeFile();
   };
 
   const FileUploaded = (
     <div className="dropzone file-uploaded">
       <p>
-        File <span className="file-name">"{fileName}"</span> has been uploaded
-        successfully!
+        File <span className="file-name">"{props.fileName}"</span> has been
+        uploaded successfully!
       </p>
       <p className="remove-file" onClick={handleRemove}>
         X
@@ -66,7 +63,8 @@ const _DropzoneComponent = props => {
 const mapStateToProps = state => ({
   rideList: state.data.rideList,
   isFileUploaded: state.data.isFileUploaded,
-  fileError: state.data.fileError
+  fileError: state.data.fileError,
+  fileName: state.data.fileName
 });
 
 const DropzoneComponent = connect(

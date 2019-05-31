@@ -8,6 +8,7 @@ export const uploadFile = file => dispatch => {
       payload.rideList = res.rideList;
       payload.isFileUploaded = true;
       payload.error = null;
+      payload.fileName = file.name;
       dispatch({
         type: FILE_UPLOAD,
         payload
@@ -17,7 +18,8 @@ export const uploadFile = file => dispatch => {
       const payload = {};
       payload.rideList = [];
       payload.isFileUploaded = false;
-      payload.fileError = "Incorrect file type uploaded";
+      payload.fileError = true;
+      // payload.fileName = file.name;
       dispatch({
         type: FILE_UPLOAD,
         payload
