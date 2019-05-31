@@ -1,11 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import { MAPBOX_DEFAULT_MAPSTYLES } from "../../util/map/controls";
-import { changeMapStyle } from "../../actions/mapActions";
 
-const _MapStylePicker = props => {
+const MapStylePicker = props => {
   const { style: currentStyle, changeMapStyle: onStyleChange } = props;
+  // console.log(props);
+
   return (
     <select
       className="map-style-picker"
@@ -20,14 +20,5 @@ const _MapStylePicker = props => {
     </select>
   );
 };
-
-const mapStateToProps = state => ({
-  style: state.map.style
-});
-
-const MapStylePicker = connect(
-  mapStateToProps,
-  { changeMapStyle }
-)(_MapStylePicker);
 
 export default MapStylePicker;

@@ -33,6 +33,10 @@
   font-size: 16px;
 }
 
+.file-name {
+  font-weight: bold;
+}
+
 .file-error {
   /* display: flex; */
   /* justify-content: space-between; */

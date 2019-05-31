@@ -1,27 +1,26 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 import { Grid, Menu, Segment } from "semantic-ui-react";
 
 import PickupTimeChartComponent from "./PickupTimeChartComponent";
-import { changeActiveChart } from "../../actions/chartActions";
 import MediumOfBookingChartComponent from "./MediumOfBookingChartComponent";
 import RidesByMonthChartComponent from "./RidesByMonthChartComponent";
 
-const _ChartReportComponent = props => {
-  const { activeChart, changeActiveChart } = props;
+const ChartReportComponent = () => {
+  // const { activeChart, changeActiveChart } = props;
+  const [activeChart, setActiveChart] = useState("pickup");
   const handleItemClick = (e, { name }) => {
-    changeActiveChart(name);
+    setActiveChart(name);
   };
 
   let chartToShow = "";
   switch (activeChart) {
-    case "bio":
+    case "pickup":
       chartToShow = <PickupTimeChartComponent />;
       break;
-    case "pics":
+    case "medium":
       chartToShow = <MediumOfBookingChartComponent />;
       break;
-    case "companies":
+    case "monthly":
       chartToShow = <RidesByMonthChartComponent />;
       break;
     default:
@@ -35,8 +34,8 @@ const _ChartReportComponent = props => {
         <Grid.Column width={4}>
           <Menu fluid vertical tabular>
             <Menu.Item
-              name="bio"
-              active={activeChart === "bio"}
+              name="pickup"
+              active={activeChart === "pickup"}
               onClick={handleItemClick}
             >
               <span className="menu-item">
@@ -45,8 +44,8 @@ const _ChartReportComponent = props => {
               </span>
             </Menu.Item>
             <Menu.Item
-              name="pics"
-              active={activeChart === "pics"}
+              name="medium"
+              active={activeChart === "medium"}
               onClick={handleItemClick}
               // className=".menu-item"
             >
@@ -56,8 +55,8 @@ const _ChartReportComponent = props => {
               </span>
             </Menu.Item>
             <Menu.Item
-              name="companies"
-              active={activeChart === "companies"}
+              name="monthly"
+              active={activeChart === "monthly"}
               onClick={handleItemClick}
             >
               <span className="menu-item">
@@ -78,12 +77,4 @@ const _ChartReportComponent = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  activeChart: state.chart.activeChart
-});
-
-const ChartReportComponent = connect(
-  mapStateToProps,
-  { changeActiveChart }
-)(_ChartReportComponent);
 export default ChartReportComponent;

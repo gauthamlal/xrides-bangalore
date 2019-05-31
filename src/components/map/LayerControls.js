@@ -1,9 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
 
-import { updateLayerSettings } from "../../actions/mapActions";
-
-const _LayerControls = props => {
+const LayerControls = props => {
   const handleValueChange = (settingName, newValue) => {
     const { settings } = props;
     if (settings[settingName] !== newValue) {
@@ -12,7 +9,7 @@ const _LayerControls = props => {
         [settingName]: newValue
       };
 
-      props.updateLayerSettings(newSettings);
+      props.handleLayerSettings(newSettings);
     }
   };
 
@@ -89,14 +86,5 @@ const Slider = ({ settingName, value, plopType, onChange }) => {
     </div>
   );
 };
-
-const mapStateToProps = state => ({
-  settings: state.map.settings
-});
-
-const LayerControls = connect(
-  mapStateToProps,
-  { updateLayerSettings }
-)(_LayerControls);
 
 export default LayerControls;
