@@ -45,8 +45,6 @@ const _MapComponent = props => {
   }, [props.rideList]);
 
   const handleHover = ({ x, y, object }) => {
-    console.log(object);
-
     const label = object
       ? object.points
         ? `${object.points.length} ${

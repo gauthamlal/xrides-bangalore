@@ -95,7 +95,7 @@ const Checkbox = ({ settingName, value, onChange }) => {
 };
 
 const Slider = ({ settingName, value, plopType, onChange }) => {
-  const { max = 100 } = plopType;
+  const { max = 100, min, step } = plopType;
 
   return (
     <div key={settingName}>
@@ -104,9 +104,9 @@ const Slider = ({ settingName, value, plopType, onChange }) => {
           <input
             type="range"
             id={settingName}
-            min={0}
+            min={min}
             max={max}
-            step={max / 100}
+            step={step}
             value={value}
             onChange={e => onChange(settingName, Number(e.target.value))}
           />
