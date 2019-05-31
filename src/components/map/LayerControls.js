@@ -22,8 +22,27 @@ const LayerControls = props => {
         <i className="controls-toggle fas fa-times" onClick={toggleSettings} />
       </div>
       {Object.keys(settings).map(key => (
-        <div key={key}>
-          <label>{plotTypes[key].displayName}</label>
+        <div
+          key={key}
+          style={
+            plotTypes[key].heading
+              ? {
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }
+              : {}
+          }
+        >
+          <label
+            style={
+              plotTypes[key].heading
+                ? { fontWeight: "bold", fontSize: "14px" }
+                : {}
+            }
+          >
+            {plotTypes[key].displayName}
+          </label>
           <div style={{ display: "inline-block", float: "right" }}>
             {settings[key]}
           </div>
@@ -70,12 +89,6 @@ const Checkbox = ({ settingName, value, onChange }) => {
           checked={value}
           onChange={e => onChange(settingName, e.target.checked)}
         />
-        {/* <input
-          type="checkbox"
-          id={settingName}
-          checked={value}
-          onChange={e => onChange(settingName, e.target.checked)}
-        /> */}
       </div>
     </div>
   );

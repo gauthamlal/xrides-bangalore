@@ -14,11 +14,12 @@
 .layer-controls {
   border-radius: 3px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  font-family: 'ff-clan-web-pro, "Helvetica Neue", Helvetica, sans-serif !important';
-  font-size: 12px;
+  /* font-family: 'ff-clan-web-pro, "Helvetica Neue", Helvetica, sans-serif !important'; */
+  font-size: 11px;
   line-height: 1.833;
   width: auto;
   position: absolute;
+  /* justify-content: sp */
   top: 20px;
   right: 20px;
   padding: 20px;
@@ -37,7 +38,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
   font-size: 16px;
 }
 
@@ -54,4 +54,10 @@
   font-size: 10px;
   z-index: 9;
   pointer-events: none;
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

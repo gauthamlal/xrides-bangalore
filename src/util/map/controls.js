@@ -8,45 +8,57 @@ export const MAPBOX_DEFAULT_MAPSTYLES = [
 
 export const HEXAGON_CONTROLS = {
   showHexagon: {
-    displayName: "Show Hexagon",
+    name: "Show Hexagon",
+    displayName: "Hexagon",
     type: "boolean",
-    value: true
+    value: true,
+    heading: true
   },
   radius: {
-    displayName: "Hexagon Radius",
+    name: "Hexagon Radius",
+    displayName: "Radius",
     type: "range",
-    value: 100,
+    value: 300,
     step: 50,
     min: 50,
-    max: 1000
+    max: 1000,
+    heading: false
   },
   coverage: {
-    displayName: "Hexagon Coverage",
+    name: "Hexagon Coverage",
+    displayName: "Coverage",
     type: "range",
     value: 1,
     step: 0.1,
     min: 0,
-    max: 1
+    max: 1,
+    heading: false
   },
   upperPercentile: {
-    displayName: "Hexagon Upper Percentile",
+    name: "Hexagon Upper Percentile",
+    displayName: "Upper Percentile",
     type: "range",
     value: 100,
     step: 0.1,
     min: 80,
-    max: 100
+    max: 100,
+    heading: false
   },
   showScatterplot: {
-    displayName: "Show Scatterplot",
+    name: "Scatterplot",
+    displayName: "Scatterplot",
     type: "boolean",
-    value: true
+    value: true,
+    heading: true
   },
   radiusScale: {
-    displayName: "Scatterplot Radius",
+    name: "Scatterplot Radius",
+    displayName: "Radius",
     type: "range",
-    value: 5,
+    value: 20,
     step: 5,
     min: 1,
-    max: 200
+    max: 200,
+    heading: false
   }
 };
