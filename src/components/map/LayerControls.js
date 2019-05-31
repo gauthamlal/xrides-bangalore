@@ -17,7 +17,7 @@ const LayerControls = props => {
   const { showSettings, toggleSettings, settings, plotTypes = {} } = props;
 
   const jsx = showSettings ? (
-    <div className="layer-controls">
+    <div className="layer-controls" key="show">
       <div className="controls-toggle__holder">
         <i className="controls-toggle fas fa-times" onClick={toggleSettings} />
       </div>
@@ -56,7 +56,7 @@ const LayerControls = props => {
       ))}
     </div>
   ) : (
-    <div className="layer-controls controls-toggle__holder">
+    <div className="layer-controls controls-toggle__holder" key="no-show">
       <i className="controls-toggle fas fa-cog" onClick={toggleSettings} />
     </div>
   );

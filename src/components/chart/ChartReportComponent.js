@@ -71,7 +71,9 @@ const ChartReportComponent = () => {
 
         <Grid.Column stretched width={12}>
           <Segment>
-            <div className="chart-container">{chartToShow}</div>
+            <div className="chart-container" key={activeChart}>
+              {chartToShow}
+            </div>
           </Segment>
         </Grid.Column>
       </Grid>
